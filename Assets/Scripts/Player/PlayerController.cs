@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class RoomManager : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    public TextMeshProUGUI PlayerScore;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +17,6 @@ public class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        PlayerScore.text = "Score: " + GameManager.Instance.SpawnedBlocks.ToString();
     }
 }
