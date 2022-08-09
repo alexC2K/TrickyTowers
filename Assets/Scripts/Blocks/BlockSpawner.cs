@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour
 {
+    public static event Action OnBlockSpawned = delegate { };
+
     public GameObject[] Blocks;
-    public GameObject NextBlock;
-    public GameObject CurrentBlock;
+
+    [SerializeField] GameObject NextBlock;
+    [SerializeField] GameObject CurrentBlock;
     
     void Start()
     {
@@ -24,28 +28,38 @@ public class BlockSpawner : MonoBehaviour
     public void SpawnBlock()
     {
         // This way I can show on the UI the next block that will be spawned
-        int index = Random.Range(0, Blocks.Length);
-        if (CurrentBlock == null)
+        if (NextBlock == null)
         {
+            int index = UnityEngine.Random.Range(0, Blocks.Length);
             CurrentBlock = Instantiate(Blocks[index], transform.position, Quaternion.identity);
 
-            int indexNextBlock = Random.Range(0, Blocks.Length);
+            int indexNextBlock = UnityEngine.Random.Range(0, Blocks.Length);
             NextBlock = Blocks[indexNextBlock];
             
         }
         else
         {
-            Instantiate(NextBlock, transform.position, Quaternion.identity);
-            CurrentBlock = null;
-        }
+            CurrentBlock = Instantiate(NextBlock, transform.position, Quaternion.identity);
 
-        GameManager.Instance.SpawnedBlocks++;
-        GameManager.Instance.RemainingBlocks--;
+            int indexNextBlock = UnityEngine.Random.Range(0, Blocks.Length);
+            NextBlock = Blocks[indexNextBlock];
+        }
+        
+        OnBlockSpawned();
     }
 
     public Transform GetSpawnerPosition()
     {
         return gameObject.transform;
+    }
+    
+    
+    public Sprite GetNextBlockSprite()
+    {
+        if (NextBlock == null)
+            return CurrentBlock.GetComponent<BlockSpriteController>().BlockSprite;
+        
+        return NextBlock.GetComponent<BlockSpriteController>().BlockSprite;
     }
 
     public void MoveSpawnerUp()

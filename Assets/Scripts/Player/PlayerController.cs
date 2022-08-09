@@ -7,16 +7,46 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public TextMeshProUGUI PlayerScore;
+    public TextMeshProUGUI PlayerMovesRemaining;
+    public Image NextBlock;
     
-    // Start is called before the first frame update
-    void Start()
+    public int SpawnedBlocks = 0;
+    public int RemainedBlocks = 5;
+    public int LastRemainedBlocks = 5;
+
+    public void Start()
     {
-        
+        BlockSpawner.OnBlockSpawned += UpdateScore;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnDestroy()
     {
-        PlayerScore.text = "Score: " + GameManager.Instance.SpawnedBlocks.ToString();
+        BlockSpawner.OnBlockSpawned -= UpdateScore;
+    }
+    
+    public void UpdateScore()
+    {
+        SpawnedBlocks += 1;
+        RemainedBlocks -= 1;
+        
+        PlayerScore.text = "Score: " + SpawnedBlocks.ToString();
+        PlayerMovesRemaining.text = RemainedBlocks.ToString();
+        NextBlock.sprite = FindObjectOfType<BlockSpawner>().GetNextBlockSprite();
+    }
+
+    public int GetRemainedBlocks()
+    {
+        return RemainedBlocks;
+    }
+    
+    public void SetRemainedBlocks()
+    {
+        RemainedBlocks = LastRemainedBlocks + UnityEngine.Random.Range(1, 10);
+        LastRemainedBlocks = RemainedBlocks;
+    }
+
+    public void SetLastRemainedBlocks()
+    {
+        LastRemainedBlocks = RemainedBlocks;
     }
 }
