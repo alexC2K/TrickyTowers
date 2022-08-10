@@ -90,14 +90,6 @@ public class BlockController : MonoBehaviour
             BlockRB.velocity = Vector2.down * VELOCITY_MULTIPLICATOR;
         }
     }
-    
-    public void EndLevel()
-    {
-        // Restart the level
-        Destroy(gameObject);
-
-        SceneManager.LoadScene("EndlessLevel");
-    }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -114,9 +106,13 @@ public class BlockController : MonoBehaviour
         if(!BlockSpawned)
         {
             OnCollisionEnterDetection();
+
             // Spawn the next block
-            FindObjectOfType<BlockSpawner>().SpawnBlock();
-            BlockSpawned = true;
+            if (GameController.Instance.GameOver != true)
+            {
+                FindObjectOfType<BlockSpawner>().SpawnBlock();
+                BlockSpawned = true;
+            }
         }
     }
 

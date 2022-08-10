@@ -9,10 +9,7 @@ public class TowerCollision : MonoBehaviour
     {
         if (collision.gameObject.tag == "Block")
         {
-            // Restart the level
-            Destroy(gameObject);
-
-            SceneManager.LoadScene("EndlessLevel");
+            GameController.Instance.EndLevel();
         }
     }
 }

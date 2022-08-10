@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public GameObject CameraObject;
+    
     public bool MoveTheCamera = false;
     public bool Moving = false;
     public static Vector3 TargetPosition;
@@ -26,5 +28,10 @@ public class CameraController : MonoBehaviour
     {
         TargetPosition = gameObject.transform.position + (Vector3.up * 5);
         MoveTheCamera = true;
+    }
+
+    public void AdjustCamera()
+    {
+        Camera.main.orthographicSize = CameraObject.transform.position.y + 11;
     }
 }

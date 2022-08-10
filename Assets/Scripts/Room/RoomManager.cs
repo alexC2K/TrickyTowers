@@ -11,6 +11,11 @@ public class RoomManager : MonoBehaviour
         SceneManager.LoadScene("EndlessLevel");
     }
 
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    
     public void QuitGame()
     {
         // Quit the title
