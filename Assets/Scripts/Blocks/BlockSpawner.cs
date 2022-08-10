@@ -21,7 +21,7 @@ public class BlockSpawner : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            SpawnBlock();
+            //SpawnBlock();
         }
     }
 
@@ -64,6 +64,6 @@ public class BlockSpawner : MonoBehaviour
 
     public void MoveSpawnerUp()
     {
-        gameObject.transform.position += new Vector3(0, 1, 0);
+        gameObject.transform.position += new Vector3(0, 10, 0);
     }
 }

@@ -8,23 +8,26 @@ public class BlockController : MonoBehaviour
     public static Transform TowerPosition;
     public static Transform EndPosition;
 
+    static float VELOCITY_MULTIPLICATOR = 5f;
     Rigidbody2D BlockRB;
+    bool BlockSpawned;
     
-    void Awake()
-    {
-        TowerPosition = Tower.Instance.GetTowerPosition();
-        EndPosition = FindObjectOfType<BlockSpawner>().GetSpawnerPosition();
-    }
-
     void Start()
     {
+        BlockSpawned = false;
+        TowerPosition = Tower.Instance.GetTowerPosition();
+        EndPosition = FindObjectOfType<BlockSpawner>().GetSpawnerPosition();
         BlockRB = GetComponent<Rigidbody2D>();
+
+        // Start going down slowly.
+        BlockRB.velocity = Vector2.down * VELOCITY_MULTIPLICATOR;
     }
     
     void Update()
     {
         Move();
         CheckEndCases();
+        MoveFaster();
     }
 
     public void Move()
@@ -56,19 +59,31 @@ public class BlockController : MonoBehaviour
 
     public void CheckEndCases()
     {
-        // TO DO: when the RemainedBlocks = 0, increase them and continue placing the blocks
+        // When the RemainedBlocks = 0, increase them and continue placing the blocks
         if (FindObjectOfType<PlayerController>().RemainedBlocks == 0)
         {
             FindObjectOfType<PlayerController>().SetRemainedBlocks();
         }
+        
         // TO DO: if the line is crossed, end the match
-        // TO DO: currently if a piece falls over after placing it, it doesn't count to losing
 
         // End the level if I reached the line
-        if (Tower.Instance.MaxHeight >= EndPosition.position.y - 3 && Tower.Instance.MaxHeight <= EndPosition.position.y)
+        if (Tower.Instance.MaxHeight >= EndPosition.position.y - 7 && Tower.Instance.MaxHeight <= EndPosition.position.y)
         {
             FindObjectOfType<CameraController>().MoveCameraUp();
             FindObjectOfType<BlockSpawner>().MoveSpawnerUp();
+        }
+    }
+    
+    public void MoveFaster()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            BlockRB.velocity = Vector2.down * VELOCITY_MULTIPLICATOR * 3;
+        }
+        else
+        {
+            BlockRB.velocity = Vector2.down * VELOCITY_MULTIPLICATOR;
         }
     }
     
@@ -83,13 +98,23 @@ public class BlockController : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision)
     {
         BlockRB.velocity = Vector2.zero;
-        BlockRB.mass = 1;
-        
+
         this.enabled = false;
 
         if (Tower.Instance.MaxHeight < transform.position.y)
         {
             Tower.Instance.MaxHeight = transform.position.y;
         }
+
+        if(!BlockSpawned)
+        {
+            FindObjectOfType<BlockSpawner>().SpawnBlock();
+            BlockSpawned = true;
+        }
+    }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        BlockRB.constraints = RigidbodyConstraints2D.None;
     }
 }
