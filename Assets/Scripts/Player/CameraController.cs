@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
     
     public void MoveCameraUp()
     {
-        TargetPosition = gameObject.transform.position + Vector3.up;
+        TargetPosition = gameObject.transform.position + (Vector3.up * 5);
         MoveTheCamera = true;
     }
 }

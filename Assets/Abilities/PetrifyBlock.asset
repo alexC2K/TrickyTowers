@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41c16fca8362f1d4ea949d7df79688f6, type: 3}
-  m_Name: PetrifyBrick
+  m_Name: PetrifyBlock
   m_EditorClassIdentifier: 
-  AbilityName: Petrify Brick
-  AbilityDescription: Petrifies a brick so it can't move.
+  AbilityName: Petrify Block
+  AbilityDescription: Petrifies a block so it can't move.
+  AbilityCooldown: 10

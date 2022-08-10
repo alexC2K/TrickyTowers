@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class BlockController : MonoBehaviour
 {
+    public static event Action OnCollisionEnterDetection = delegate { };
+    
     public static Transform TowerPosition;
     public static Transform EndPosition;
 
     static float VELOCITY_MULTIPLICATOR = 5f;
+
     Rigidbody2D BlockRB;
     bool BlockSpawned;
     
@@ -100,7 +104,8 @@ public class BlockController : MonoBehaviour
         BlockRB.velocity = Vector2.zero;
 
         this.enabled = false;
-
+        
+        // Update the tower height if necessary
         if (Tower.Instance.MaxHeight < transform.position.y)
         {
             Tower.Instance.MaxHeight = transform.position.y;
@@ -108,6 +113,8 @@ public class BlockController : MonoBehaviour
 
         if(!BlockSpawned)
         {
+            OnCollisionEnterDetection();
+            // Spawn the next block
             FindObjectOfType<BlockSpawner>().SpawnBlock();
             BlockSpawned = true;
         }
@@ -116,5 +123,10 @@ public class BlockController : MonoBehaviour
     public void OnCollisionStay2D(Collision2D collision)
     {
         BlockRB.constraints = RigidbodyConstraints2D.None;
+    }
+
+    public GameObject GetCurrentBlock()
+    {
+        return this.gameObject;
     }
 }

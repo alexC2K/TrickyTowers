@@ -7,4 +7,5 @@ public class AbilityInfo : ScriptableObject
 {
     public string AbilityName;
     public string AbilityDescription;
+    public int AbilityCooldown;
 }

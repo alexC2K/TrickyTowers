@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Ability : MonoBehaviour
 {
     public AbilityInfo AbilityInstanceInfo;
-    public float AbilityCooldown;
+    public int AbilityCooldownRemaining;
     
     public abstract void UseAbility();
 }

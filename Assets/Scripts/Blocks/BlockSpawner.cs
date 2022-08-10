@@ -11,6 +11,7 @@ public class BlockSpawner : MonoBehaviour
 
     [SerializeField] GameObject NextBlock;
     [SerializeField] GameObject CurrentBlock;
+    [SerializeField] GameObject LastBlock;
     
     void Start()
     {
@@ -26,7 +27,7 @@ public class BlockSpawner : MonoBehaviour
     }
 
     public void SpawnBlock()
-    {
+    {  
         // This way I can show on the UI the next block that will be spawned
         if (NextBlock == null)
         {
@@ -35,16 +36,16 @@ public class BlockSpawner : MonoBehaviour
 
             int indexNextBlock = UnityEngine.Random.Range(0, Blocks.Length);
             NextBlock = Blocks[indexNextBlock];
-            
         }
         else
         {
+            LastBlock = CurrentBlock;
             CurrentBlock = Instantiate(NextBlock, transform.position, Quaternion.identity);
 
             int indexNextBlock = UnityEngine.Random.Range(0, Blocks.Length);
             NextBlock = Blocks[indexNextBlock];
         }
-        
+
         OnBlockSpawned();
     }
 
@@ -61,9 +62,14 @@ public class BlockSpawner : MonoBehaviour
         
         return NextBlock.GetComponent<BlockSpriteController>().BlockSprite;
     }
-
+    
     public void MoveSpawnerUp()
     {
         gameObject.transform.position += new Vector3(0, 10, 0);
+    }
+
+    public GameObject GetLastBlock()
+    {
+        return LastBlock;
     }
 }
