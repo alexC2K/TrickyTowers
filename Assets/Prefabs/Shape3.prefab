@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3058516269677103162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.54, y: 12.46, z: 5.2149816}
+  m_LocalPosition: {x: -29.5, y: 12.5, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -61,12 +61,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.5554981, y: 2.561882}
-      - {x: -0.4431553, y: 2.556199}
-      - {x: -0.43060595, y: -0.42785856}
-      - {x: 1.5434365, y: -0.44830883}
-      - {x: 1.5389744, y: 0.5541003}
-      - {x: 0.5645819, y: 0.5615129}
+    - - {x: 0.52599907, y: 2.5225496}
+      - {x: -0.39398956, y: 2.5267}
+      - {x: -0.39127642, y: -0.39836046}
+      - {x: 1.5103879, y: -0.39914405}
+      - {x: 1.5126152, y: 0.5143614}
+      - {x: 1.5126148, y: 0.5143616}
+      - {x: 0.52525043, y: 0.52218145}
 --- !u!50 &1117483549535769747
 Rigidbody2D:
   serializedVersion: 4
@@ -79,7 +80,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 3.9649804
+  m_Mass: 3.5884867
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1

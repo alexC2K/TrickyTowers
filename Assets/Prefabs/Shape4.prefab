@@ -399,7 +399,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4765717950950450664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -37.5, y: 15.43, z: 5.157723}
+  m_LocalPosition: {x: -37.5, y: 15.5, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -432,14 +432,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.4956398, y: 0.5697365}
-      - {x: -1.4710951, y: 0.5626991}
-      - {x: -1.4698448, y: -0.4060974}
-      - {x: -0.48178482, y: -0.41502285}
-      - {x: -0.48022217, y: -1.3980702}
-      - {x: 1.4687347, y: -1.4003963}
-      - {x: 1.4766175, y: -0.43631148}
-      - {x: 0.49275112, y: -0.43882376}
+    - - {x: 0.46092224, y: 0.5282688}
+      - {x: -1.4457006, y: 0.5305526}
+      - {x: -1.4470177, y: -0.37813377}
+      - {x: -0.4538231, y: -0.3777399}
+      - {x: -0.45226043, y: -1.3794287}
+      - {x: 1.4526596, y: -1.3750019}
+      - {x: 1.4537941, y: -0.45238566}
+      - {x: 0.46060467, y: -0.4523297}
 --- !u!50 &5581414347500373719
 Rigidbody2D:
   serializedVersion: 4
@@ -452,7 +452,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 3.8241644
+  m_Mass: 3.5614576
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
