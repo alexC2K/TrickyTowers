@@ -5,7 +5,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject CameraObject;
-    
+    public GameObject LineObject;
+        
     public bool MoveTheCamera = false;
     public bool Moving = false;
     public static Vector3 TargetPosition;
@@ -26,7 +27,13 @@ public class CameraController : MonoBehaviour
     
     public void MoveCameraUp()
     {
-        TargetPosition = gameObject.transform.position + (Vector3.up * 5);
+        TargetPosition = gameObject.transform.position + Vector3.up;
+
+        // Move the line
+        Vector3 LinePosition = LineObject.transform.position;
+        LinePosition.y += 5f;
+        LineObject.transform.position = LinePosition;
+        
         MoveTheCamera = true;
     }
 

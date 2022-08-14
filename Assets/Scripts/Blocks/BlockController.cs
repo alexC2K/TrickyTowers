@@ -32,8 +32,26 @@ public class BlockController : MonoBehaviour
         Move();
         CheckEndCases();
         MoveFaster();
+        //LineConnection(); // This works as intended if I'm using sprites.
     }
+    
+    public void LineConnection()
+    {
+        // Calculate the position
+        Vector3 BlockPosition = this.gameObject.transform.position;
+        Vector3 TargetPosition = this.gameObject.transform.position;
+        TargetPosition.y = Tower.Instance.gameObject.transform.position.y;
+        
+        // Set the line
+        var lr = this.gameObject.GetComponent<LineRenderer>();
+        lr.SetPosition(0, BlockPosition);
+        lr.SetPosition(1, TargetPosition);
 
+        // Calculate the width
+        float width = this.gameObject.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
+        lr.startWidth = width;
+    }
+    
     public void Move()
     {
         if (Input.GetKeyUp(KeyCode.A))
@@ -67,15 +85,14 @@ public class BlockController : MonoBehaviour
         if (FindObjectOfType<PlayerController>().RemainedBlocks == 0)
         {
             FindObjectOfType<PlayerController>().SetRemainedBlocks();
-        }
-        
-        // TO DO: if the line is crossed, end the match
-
-        // End the level if I reached the line
-        if (Tower.Instance.MaxHeight >= EndPosition.position.y - 7 && Tower.Instance.MaxHeight <= EndPosition.position.y)
-        {
             FindObjectOfType<CameraController>().MoveCameraUp();
             FindObjectOfType<BlockSpawner>().MoveSpawnerUp();
+        }
+        
+        // If the line is crossed, end the match
+        if(Tower.Instance.MaxHeight >= FindObjectOfType<CameraController>().LineObject.gameObject.transform.position.y)
+        {
+            FindObjectOfType<GameController>().EndLevel();
         }
     }
     
@@ -96,6 +113,12 @@ public class BlockController : MonoBehaviour
         BlockRB.velocity = Vector2.zero;
 
         this.enabled = false;
+
+        /*
+        // Remove the line renderer
+        var lr = this.gameObject.GetComponent<LineRenderer>();
+        lr.enabled = false;
+        */
         
         // Update the tower height if necessary
         if (Tower.Instance.MaxHeight < transform.position.y)

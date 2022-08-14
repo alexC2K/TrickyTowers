@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviour
 {
+    public AudioSource audioSources;
+    
     public void LoadFirstLevel()
     {
         // Load the endless level
@@ -13,6 +15,7 @@ public class RoomManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        // Load main menu
         SceneManager.LoadScene("MainMenu");
     }
     
@@ -20,5 +23,11 @@ public class RoomManager : MonoBehaviour
     {
         // Quit the title
         Application.Quit();
+    }
+
+    public void PlaySound()
+    {
+        // Play button SFX
+        audioSources.Play();
     }
 }

@@ -74,7 +74,7 @@ public class BlockSpawner : MonoBehaviour
     
     public void MoveSpawnerUp()
     {
-        gameObject.transform.position += new Vector3(0, 10, 0);
+        gameObject.transform.position += new Vector3(0, 3, 0);
     }
 
     public GameObject GetLastBlock()
