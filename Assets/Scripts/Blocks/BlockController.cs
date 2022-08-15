@@ -7,12 +7,13 @@ using UnityEngine.SceneManagement;
 public class BlockController : MonoBehaviour
 {
     public static event Action OnCollisionEnterDetection = delegate { };
-    
+
     public static Transform TowerPosition;
     public static Transform EndPosition;
 
     static float VELOCITY_MULTIPLICATOR = 5f;
 
+    AudioSource BlockRotate;
     Rigidbody2D BlockRB;
     bool BlockSpawned;
     
@@ -22,6 +23,7 @@ public class BlockController : MonoBehaviour
         TowerPosition = Tower.Instance.GetTowerPosition();
         EndPosition = FindObjectOfType<BlockSpawner>().GetSpawnerPosition();
         BlockRB = GetComponent<Rigidbody2D>();
+        BlockRotate = GameObject.Find("RotateSound").GetComponent<AudioSource>();
 
         // Start going down slowly.
         BlockRB.velocity = Vector2.down * VELOCITY_MULTIPLICATOR;
@@ -32,8 +34,9 @@ public class BlockController : MonoBehaviour
         Move();
         CheckEndCases();
         MoveFaster();
-        //LineConnection(); // This works as intended if I'm using sprites.
+        LineConnection(); // This works as intended if I'm using sprites.
     }
+
     
     public void LineConnection()
     {
@@ -48,34 +51,43 @@ public class BlockController : MonoBehaviour
         lr.SetPosition(1, TargetPosition);
 
         // Calculate the width
-        float width = this.gameObject.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
+        var renderer = this.gameObject.GetComponent<SpriteRenderer>();
+        float width = renderer.bounds.size.x;
+        
+        // Set the width
         lr.startWidth = width;
     }
     
     public void Move()
     {
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             // Move to left
-            transform.Translate(Vector3.left, Space.World);
+            transform.Translate(Vector3.left * 0.01f, Space.World);
         }
 
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             // Move to right
-            transform.Translate(Vector3.right, Space.World);
+            transform.Translate(Vector3.right * 0.01f, Space.World);
         }
 
         if (Input.GetKeyUp(KeyCode.Q))
         {
             // Rotate Z axis 90 degrees
             transform.Rotate(Vector3.forward, 90);
+
+            // Play rotate sound
+            BlockRotate.Play();
         }
 
         if (Input.GetKeyUp(KeyCode.E))
         {
             // Rotate Z axis -90 degrees
             transform.Rotate(Vector3.forward, -90);
+
+            // Play rotate sound
+            BlockRotate.Play();
         }
     }
 
@@ -114,11 +126,11 @@ public class BlockController : MonoBehaviour
 
         this.enabled = false;
 
-        /*
+        
         // Remove the line renderer
         var lr = this.gameObject.GetComponent<LineRenderer>();
         lr.enabled = false;
-        */
+        
         
         // Update the tower height if necessary
         if (Tower.Instance.MaxHeight < transform.position.y)

@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4261821021056165488}
+  - component: {fileID: 6281434608762548999}
   - component: {fileID: 7373215294577528798}
   - component: {fileID: 7384411402061669591}
   - component: {fileID: 5977008193738969393}
@@ -21,7 +21,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4261821021056165488
+--- !u!4 &6281434608762548999
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,11 +52,11 @@ PolygonCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    border: {x: 0.114285715, y: 0.05142857, z: 0.06285714, w: 0.09142857}
+    pivot: {x: 1, y: 0}
+    oldSize: {x: 3.102857, y: 2.0228572}
+    newSize: {x: 5.43, y: 3.54}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -583,6 +583,6 @@ Transform:
   - {fileID: 5593443942943756703}
   - {fileID: 5593443941736401106}
   - {fileID: 5593443942932991394}
-  m_Father: {fileID: 4261821021056165488}
+  m_Father: {fileID: 6281434608762548999}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
