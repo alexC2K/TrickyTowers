@@ -46,15 +46,6 @@ public class BlockSpawner : MonoBehaviour
             NextBlock = Blocks[indexNextBlock];
         }
 
-        // Simple trick for Shape1 (cube) block so it can fit with the other blocks
-        if(CurrentBlock.gameObject.name.Contains("Shape1"))
-        {
-            Vector3 position = CurrentBlock.transform.position;
-            position.x += 0.5f;
-            
-            CurrentBlock.transform.position = position;    
-        }
-
         OnBlockSpawned();
     }
 
