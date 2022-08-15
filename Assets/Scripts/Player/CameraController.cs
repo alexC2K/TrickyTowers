@@ -28,13 +28,16 @@ public class CameraController : MonoBehaviour
     public void MoveCameraUp()
     {
         TargetPosition = gameObject.transform.position + Vector3.up;
-
-        // Move the line
-        Vector3 LinePosition = LineObject.transform.position;
-        LinePosition.y += 5f;
-        LineObject.transform.position = LinePosition;
         
         MoveTheCamera = true;
+    }
+
+    public void MoveLineUp()
+    {
+        // Move the line
+        Vector3 LinePosition = LineObject.transform.position;
+        LinePosition.y += 3f;
+        LineObject.transform.position = LinePosition;
     }
 
     public void AdjustCamera()

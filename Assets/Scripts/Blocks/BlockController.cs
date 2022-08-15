@@ -16,6 +16,7 @@ public class BlockController : MonoBehaviour
     AudioSource BlockRotate;
     Rigidbody2D BlockRB;
     bool BlockSpawned;
+    float LastPosition;
     
     void Start()
     {
@@ -97,10 +98,19 @@ public class BlockController : MonoBehaviour
         if (FindObjectOfType<PlayerController>().RemainedBlocks == 0)
         {
             FindObjectOfType<PlayerController>().SetRemainedBlocks();
+            FindObjectOfType<CameraController>().MoveLineUp();
+        }
+
+        float aux = FindObjectOfType<CameraController>().LineObject.gameObject.transform.position.y - Tower.Instance.MaxHeight;
+        // Move the camera up only if I'm close enough to the line
+        if (aux <= 5f && aux - LastPosition > 0.1f)
+        {
             FindObjectOfType<CameraController>().MoveCameraUp();
             FindObjectOfType<BlockSpawner>().MoveSpawnerUp();
+
+            LastPosition = FindObjectOfType<CameraController>().LineObject.gameObject.transform.position.y - Tower.Instance.MaxHeight;
         }
-        
+
         // If the line is crossed, end the match
         if(Tower.Instance.MaxHeight >= FindObjectOfType<CameraController>().LineObject.gameObject.transform.position.y)
         {
